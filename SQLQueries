@@ -1,0 +1,72 @@
+create table users(
+rid int primary key, 
+password varchar(30) not null,
+first_name varchar(30) not null,
+last_name varchar(30) not null,
+email varchar(30) not null,
+major varchar(30) not null,
+college varchar(30) not null,
+department varchar(30) not null
+);
+
+create table books(
+id integer primary key auto_increment, 
+isbn varchar(30) not null,
+name varchar(30) not null, 
+author varchar(30) not null,
+edition varchar(30) not null, 
+publisher varchar(30) not null, 
+description varchar(50) not null, 
+availablefrom date, 
+availableto date,
+user integer,
+hold integer not null default 0,
+available integer not null default 1,
+deleted int not null default 0,
+foreign key (user) references users(rid));
+
+create table requests(
+id int primary key auto_increment, 
+user int not null, 
+book int not null, 
+request_date date not null, 
+reject_accept int default -1, 
+withdraw int default -1, 
+returned int default -1, 
+foreign key(user) references users(rid), 
+foreign key(book) references books(id)); 
+
+###################### SAMPLE DATA ########################################################################
+INSERT INTO users(rid,password,first_name,last_name,email,major,college,department) values(820852400,'sreeleela','Goutham','Thoram','thoramgowtham@gmail.com','Psychology','College of Sciences',
+'Department of Psychology');
+
+INSERT INTO users(rid,password,first_name,last_name,email,major,college,department) values(820852401,'sreeleela','Chris','Nolan','chris90@gmail.com','Nutritional Sciences','School of Exercise and Nutritional Sciences','Department of Nutritional Sciences');
+
+INSERT INTO users(rid,password,first_name,last_name,email,major,college,department) values(820852402,'sreeleela','jhon','Carter','jhon92@gmail.com','English Literature','College of English & Comparative Literature','Department of English & Comparative Literature');
+
+INSERT INTO users(rid,password,first_name,last_name,email,major,college,department) values(820852403,'sreeleela','Sree','Nadipalli','sree.leela92@gmail.com','Computer Science','College of Sciences','Department of Computer Science');
+
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0316238798,'Harry Potter','JK Rowling','12th','Little Brown','Novel','2018-07-20','2018-07-27',820852400);
+
+ INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0316238798,'Harry','JK Rowling','10th','Little','Potter Novel','2018-07-20','2018-07-27',820852400);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0201702258,'UML','Alistair','2nd','Addison','Usecases','2018-07-13','2018-07-30',820852400);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0393979504,'Programming','K.N.King','2nd','W.W.Norton','C Programming','2018-07-01','2018-07-30',820852400);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0134670949,'DS','Y.Daniel Liang','1st','Pearson','Data Structures','2018-07-17','2018-08-30',820852400);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0133813460,'Java Prog','Liang','10th','Prentice Hall Inc','JAVA','2018-07-17','2018-07-23',820852401);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (1847198848,'Python','Arbuckle','10th','PacktPublishing','Python','2018-07-16','2018-07-27',820852401);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0385537859,'Inferno','Dan Brown','13','Doubleday & Co','Novel','2018-07-20','2018-07-27',820852402);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0307277674,'Da Vinci','Dan Brown','3rd','Anchor Press','Novel','2018-07-20','2018-08-27',820852402);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0316228583,'Causual Vacancy','JK Rowling','12th','Little Brown','Novel','2018-07-20','2018-07-27',820852403);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0596007739,'JavaInNutshell','DavidFlangan','5th','OReillyMedia','Java','2018-07-20','2018-07-27',820852403);
+
+INSERT INTO books (isbn,name,author,edition,publisher,description,availablefrom,availableto,user) values (0131872486,'Java Thinking','Bruice Ekil','4th','Prentice Hall','Java','2018-07-18','2018-08-27',820852403);
